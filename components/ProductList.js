@@ -8,11 +8,9 @@ const ProductList = ({ products }) => {
     <ProductItem key={product._id} product={product} />
   ));
   return (
-    <VStack style={styles.container}>
-      <ScrollView>
-        <View style={styles.scroll}>{productList}</View>
-      </ScrollView>
-    </VStack>
+    <ScrollView style={styles.container}>
+      <View style={styles.scroll}>{productList}</View>
+    </ScrollView>
   );
 };
 
@@ -25,8 +23,5 @@ const styles = StyleSheet.create({
   },
   scroll: {
     width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
   },
 });

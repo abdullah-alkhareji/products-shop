@@ -5,10 +5,13 @@ import CartItem from "./CartItem";
 import Header from "./Header";
 import { observer } from "mobx-react";
 import { Button, VStack } from "native-base";
+import authStore from "../stores/authStore";
 
 const CartList = () => {
+  const user = authStore.user;
+
   const handleCheckout = () => {
-    cartStore.chechout();
+    cartStore.chechout(user);
     Alert.alert("Thanks for purchasing with us ");
   };
 

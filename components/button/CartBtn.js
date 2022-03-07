@@ -1,15 +1,30 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Badge } from "native-base";
 import cartStore from "../../stores/cartStore";
 import { observer } from "mobx-react";
+import authStore from "../../stores/authStore";
 
 const CartBtn = () => {
   const navigation = useNavigation();
+  const handlePress = () => {
+    if (authStore.user) {
+      navigation.navigate("Cart");
+    } else {
+      Alert.alert("Signin", "You are not singed in", [
+        {
+          text: "Cancel",
+          onPress: () => console.log("canceled"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => navigation.navigate("Signin") },
+      ]);
+    }
+  };
   return (
-    <Pressable onPress={() => navigation.navigate("Cart")} width={25}>
+    <Pressable onPress={handlePress} width={25}>
       <Badge // bg="red.400"
         colorScheme="red"
         rounded="full"

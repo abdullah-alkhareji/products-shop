@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { instance } from "./instance";
 
 class CartStore {
   constructor() {
@@ -89,8 +90,18 @@ class CartStore {
     }
   };
 
-  chechout = async () => {
+  chechout = async (user) => {
     try {
+      const cartProducts = this.items.map((item) => {
+        return {
+          product: item.product._id,
+          quantity: item.quantity,
+        };
+      });
+
+      const newOrder = { buyer: user, items: cartProducts };
+
+      await instance.post("/orders/checkout", newOrder);
       this.items = [];
       const jsonItems = JSON.stringify(this.items);
       await AsyncStorage.setItem("Cart", jsonItems);

@@ -6,7 +6,8 @@ import ShopDetails from "../ShopDetails";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CartList from "../CartList";
-import CartBtn from "../button/CartBtn";
+import Signin from "../authentication/Signin";
+import Signup from "../authentication/Signup";
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
@@ -30,6 +31,16 @@ const RootNavigator = () => {
       <Stack.Screen
         name="Cart"
         component={CartList}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signin"
+        component={Signin}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={Signup}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
